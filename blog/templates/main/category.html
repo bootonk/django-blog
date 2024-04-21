@@ -1,0 +1,15 @@
+{% extends "main/header.html" %}
+
+{% block page_title %}
+    <h2>Blog Posts</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    {% block posts %}
+        {% for post in posts %}
+            <h3><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></h3>
+            {% comment %} 'safe' allows for the WSIWIG HTML to process properly {% endcomment %}
+            <h5> {{ post.subtitle | safe }}</h5>
+        {% endfor %}
+    {% endblock posts %}
+{% endblock page_content %}
