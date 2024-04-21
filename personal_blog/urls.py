@@ -20,9 +20,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include("blog.urls")),
-    path('admin/', admin.site.urls),
-    path('tinymce/', include('tinymce.urls')), # added to connect the WSIWIG editor in the article admin
+    path("", include("blog.urls")),
+    path("admin/", admin.site.urls),
+    path("tinymce/", include("tinymce.urls")), # added to connect the WSIWIG editor in the article admin
 ]
 
 if settings.DEBUG:
