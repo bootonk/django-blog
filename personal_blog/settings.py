@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "django_htmx", # added to use HTMX client side
     "tinymce", # added for wsiwig editor within the admin
     "blog.apps.BlogConfig",# connecting the django app to the project
     "django.contrib.admin",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django_htmx.middleware.HtmxMiddleware", # adds request.htmx to use HTMX
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
