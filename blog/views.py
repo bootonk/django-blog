@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # custom imports to this project
 from django.http import HttpResponseRedirect
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
 
 # a Queryset is a collection of all the objects in the database that match the query
@@ -13,16 +13,22 @@ from blog.forms import CommentForm
 def homepage(request):
     # .order_by arranges the results, the minus starts the result at the largest value
     # or in this case the most recent
-    posts = Post.objects.all().order_by("-created_on")
+    posts = Post.objects.all().order_by("-created_on")[:6]
+    categories = Category.objects.all()[:6]
+
+    alternateList = enumerate(zip(categories, posts))
+
 
     # context defines context dictionary which populates the render function
     # this can also be sent as an object within the render()
     context = {
         "posts": posts,
+        "categories": categories,
+        "alternateList": alternateList
     }
 
     # renders the home.html template with the populated context content
-    return render(request, "main/home.html", context)
+    return render(request, "main/index.html", context)
 
 # results in a Queryset containing all the posts in the database, this is sending to an alt template for more control
 def posts(request):
