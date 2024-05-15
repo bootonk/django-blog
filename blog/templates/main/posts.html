@@ -1,13 +1,19 @@
 {% extends "main/header.html" %}
+{% load static %}
 
 {% block page_title %}
-    <h2>Blog Posts</h2>
+    <div class="posts__header header narrow-header-width">
+        {% include "./include/logo.html" %}
+        <h2>Blog Posts</h2>
+    </div>
 {% endblock page_title %}
 
 {% block page_content %}
-    {% block posts %}
-        {% for post in posts %}
-            <h3><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></h3>
-        {% endfor %}
-    {% endblock posts %}
+    <div class="posts__body narrow-body-width">
+        {% block posts %}
+            {% for post in posts %}
+                <h3><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></h3>
+            {% endfor %}
+        {% endblock posts %}
+    </div>
 {% endblock page_content %}

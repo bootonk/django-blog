@@ -1,39 +1,45 @@
 {% extends "main/header.html" %}
+{% load static %}
 
 {% block page_title %}
-    <h2>{{ post.title }}</h2>
+    <div class="post__header header narrow-header-width">
+        {% include "./include/logo.html" %}
+        <h2>{{ post.title }}</h2>
+    </div>
 {% endblock page_title %}
 
 {% block page_content %}
-    <h5>{{ post.subtitle }}</h5>
-    <small>
-        {{ post.created_on.date }} | Categories: {% for category in post.categories.all %}
-            <a href="{% url 'blog_category' category.name %}"> {{ category.name }} </a>
+    <div class="post__body narrow-body-width">
+        <h5>{{ post.subtitle }}</h5>
+        <small>
+            {{ post.created_on.date }} | Categories: {% for category in post.categories.all %}
+                <a href="{% url 'blog_category' category.name %}"> {{ category.name }} </a>
+            {% endfor %}
+        </small>
+
+        {% comment %} 'safe' allows for the WSIWIG HTML to process properly {% endcomment %}
+        <p>{{ post.body | safe }}</p>
+
+        <h3>Leave a comment:</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                {{ form.author }}
+            </div>
+            <div>
+                {{ form.body }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <h3>Comments:</h3>
+        {% for comment in comments %}
+            <p>
+                On {{ comment.created_on.date }} <b>{{ comment.author }}</b> wrote:
+            </p>
+            <p>
+                {{ comment.body | linebreaks }}
+            </p>
         {% endfor %}
-    </small>
-
-    {% comment %} 'safe' allows for the WSIWIG HTML to process properly {% endcomment %}
-    <p>{{ post.body | safe }}</p>
-
-    <h3>Leave a comment:</h3>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            {{ form.author }}
-        </div>
-        <div>
-            {{ form.body }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <h3>Comments:</h3>
-    {% for comment in comments %}
-        <p>
-            On {{ comment.created_on.date }} <b>{{ comment.author }}</b> wrote:
-        </p>
-        <p>
-            {{ comment.body | linebreaks }}
-        </p>
-    {% endfor %}
+     </div>
 {% endblock page_content %}

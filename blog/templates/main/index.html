@@ -2,52 +2,69 @@
 {% load static %}
 
 {% block page_content %}
-<div class="homepage-grid">
-    <div class="grid__logo desktop-only">
-        <img class="logo" src={% static 'images/weft.svg' %}>
+    <div class="logo__mobile mobile-only">
+        <img class="logo" src={% static 'images/stacked.svg' %}>
             <a href="{% url 'homepage' %}"></a>
         </img>
     </div>
-    <div class="grid__subtitle desktop-only">
-        <p>Some text to mess around with later if it isn't to jam packed. Maybe this is too packed already though?</p>
-    </div>
+    <div class="homepage-grid">
+        <div class="grid__logo desktop-only">
+            <img class="logo" src={% static 'images/corner.svg' %}>
+                <a href="{% url 'homepage' %}"></a>
+            </img>
+        </div>
+        <div class="grid__logo-tablet tablet-only">
+            <img class="logo" src={% static 'images/landscape.svg' %}>
+                <a href="{% url 'homepage' %}"></a>
+            </img>
+        </div>
+        <div class="grid__subtitle desktop-only">
+            <p>Some text to mess around with later if it isn't to jam packed. Maybe this is too packed already though?</p>
+        </div>
 
-    {% block posts %}
-        {% for index, alternateList in alternateList %}
-            <a class="homepage-grid__grid-item grid__post index-{{ index }}" href="{% url 'blog_post' alternateList.1.pk %}">
-                <div class="post__text">
-                    <h3>{{ alternateList.1.title }}</h3>
-                </div>
-            </a>
-            <div class="homepage-grid__grid-item grid__category index-{{ index }}">
-                <a href="{% url 'blog_category' alternateList.0.pk %}">
-                    <h3>{{ alternateList.0.name }}</h3>
+        {% block posts %}
+            {% for index, alternateList in alternateList %}
+                <a class="homepage-grid__grid-item grid__post index-{{ index }}" href="{% url 'blog_post' alternateList.1.pk %}">
+                    <div class="post__text">
+                        <h3>{{ alternateList.1.title }}</h3>
+                    </div>
                 </a>
-            </div>
-        {% endfor %}
-    {% endblock posts %}
+                <div class="homepage-grid__grid-item grid__category index-{{ index }}">
+                    <a href="{% url 'blog_category' alternateList.0.pk %}">
+                        <h3>{{ alternateList.0.name }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endblock posts %}
 
-    {% comment %} Spacers: All screen sizes {% endcomment %}
-    <div class="grid__category-spacer index-0"></div>
-    <div class="grid__post-spacer index-0"></div>
-    <div class="grid__post-spacer index-1"></div>
-    <div class="grid__post-spacer index-3"></div>
-    <div class="grid__category-spacer index-5"></div>
+        {% comment %} Spacers: All screen sizes {% endcomment %}
+        <div class="grid__category-spacer index-0"></div>
+        <div class="grid__post-spacer index-0"></div>
+        <div class="grid__post-spacer index-1"></div>
+        <div class="grid__post-spacer index-3"></div>
+        <div class="grid__category-spacer index-5"></div>
 
-    {% comment %} Spacers, Loops, and Nav: Desktop only {% endcomment %}
-    <div class="grid__category-spacer index-1 desktop-only"></div>
-    <div class="grid__category-spacer index-4 desktop-only"></div>
-    <div class="grid__category-spacer-extra index-0 desktop-only"></div>
-    <div class="grid__category-spacer-extra index-1 desktop-only"></div>
-    <div class="grid__post-loop__outer index-1 desktop-only"></div>
-    <div class="grid__post-loop__outer index-3 desktop-only"></div>
-    <div class="grid__post-loop__inner index-1 desktop-only"></div>
-    <div class="grid__post-loop__inner index-3 desktop-only"></div>
-    <div class="grid__navigation desktop-only"><a class="navigation__link desktop-only" href="{% url 'blog_posts' %}">All posts</a></div>
+        {% comment %} Spacers and Nav: Tablet and Desktop {% endcomment %}
+        <div class="grid__category-spacer index-1 tablet-and-up"></div>
+        <div class="grid__category-spacer index-4 tablet-and-up"></div>
+        <div class="grid__category-spacer-extra index-0 tablet-and-up"></div>
+        <div class="grid__category-spacer-extra index-1 tablet-and-up"></div>
+        <div class="grid__navigation desktop-only"><a class="navigation__link desktop-only" href="{% url 'blog_posts' %}">All posts</a></div>
 
-    {% comment %} Spacers: Mobile only {% endcomment %}
-    <div class="grid__post-spacer index-2 mobile-only"></div>
-    <div class="grid__post-spacer index-4 mobile-only"></div>
-    <div class="grid__post-spacer index-5 mobile-only"></div>
-</div>
+
+        {% comment %} Spacers and Loops: Desktop only {% endcomment %}
+        <div class="grid__category-spacer-end end-cap-1 desktop-only"></div>
+        <div class="grid__category-spacer-end end-cap-2 desktop-only"></div>
+        <div class="grid__category-spacer-end end-cap-3 desktop-only"></div>
+        <div class="grid__category-spacer-end end-cap-4 desktop-only"></div>
+        <div class="grid__post-loop__outer index-1 desktop-only"></div>
+        <div class="grid__post-loop__outer index-3 desktop-only"></div>
+        <div class="grid__post-loop__inner index-1 desktop-only"></div>
+        <div class="grid__post-loop__inner index-3 desktop-only"></div>
+
+        {% comment %} Spacers: Mobile only {% endcomment %}
+        <div class="grid__post-spacer index-2 mobile-only"></div>
+        <div class="grid__post-spacer index-4 mobile-only"></div>
+        <div class="grid__post-spacer index-5 mobile-only"></div>
+    </div>
 {% endblock page_content %}
