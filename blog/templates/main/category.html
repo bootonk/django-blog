@@ -2,8 +2,9 @@
 
 {% block page_title %}
     <div class="category__header header narrow-header-width">
-        <h2>Blog Posts</h2>
         <a href="{% url 'homepage' %}">{% include "./include/logo.html" %}</a>
+        <h2>{{ category.name }}</h2>
+        <p>{{ category.description }}</p>
     </div>
 {% endblock page_title %}
 

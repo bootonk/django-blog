@@ -1,6 +1,6 @@
 # render function of the views looks for HTML templates in a directory named templates/ inside your app directory
 # templates of different apps can have the same names so it's BP to add a subdirectory with the app's name inside the templates/ directory
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # custom imports to this project
 from django.http import HttpResponseRedirect
@@ -65,15 +65,16 @@ def post(request, pk):
     return render(request, "main/post.html", context)
 
 
-def category(request, category):
+def category(request, pk):
+    category_obj = get_object_or_404(Category, pk=pk)
     # .filter is Django Queryset filter to set conditions to retrieve results
     posts = Post.objects.filter(
-        categories__name__contains=category
+        categories=category_obj
     ).order_by("-created_on")
 
     # context dictionary to send into template
     context = {
-      "category": category,
+      "category": category_obj,
       "posts": posts,
     }
 

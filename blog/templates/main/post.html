@@ -13,7 +13,7 @@
         <h5>{{ post.subtitle }}</h5>
         <small>
             {{ post.created_on.date }} | Categories: {% for category in post.categories.all %}
-                <a href="{% url 'blog_category' category.name %}"> {{ category.name }} </a>
+                <a href="{% url 'blog_category' category.pk %}"> {{ category.name }} </a>
             {% endfor %}
         </small>
 
