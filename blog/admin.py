@@ -2,7 +2,8 @@ from django.contrib import admin
 from blog.models import Category, Comment, Post
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display=("name", "description")
+    fields=("name", "description")
 
 class PostAdmin(admin.ModelAdmin):
     # Overrides default admin org and splits into groups

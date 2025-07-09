@@ -4,6 +4,7 @@ from tinymce.models import HTMLField
 # models create the tables within the database to store and read all content
 class Category(models.Model):
     name = models.CharField(max_length=30)
+    description = models.TextField(blank=True)
 
     class Meta:
         verbose_name_plural = "categories" # updates categorys to categories with str overide below
