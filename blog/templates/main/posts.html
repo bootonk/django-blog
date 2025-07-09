@@ -3,7 +3,7 @@
 
 {% block page_title %}
     <div class="posts__header header narrow-header-width">
-        {% include "./include/logo.html" %}
+        <a href="{% url 'homepage' %}">{% include "./include/logo.html" %}</a>
         <h2>Blog Posts</h2>
     </div>
 {% endblock page_title %}
